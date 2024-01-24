@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capluga", "Capluga\Capluga.csproj", "{8919C0B8-4448-4AA6-8ADF-A2D8BA18E794}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8919C0B8-4448-4AA6-8ADF-A2D8BA18E794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8919C0B8-4448-4AA6-8ADF-A2D8BA18E794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8919C0B8-4448-4AA6-8ADF-A2D8BA18E794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8919C0B8-4448-4AA6-8ADF-A2D8BA18E794}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03EFAD8A-5E13-4FF3-8069-24E5E474BA48}
+	EndGlobalSection
+EndGlobal
