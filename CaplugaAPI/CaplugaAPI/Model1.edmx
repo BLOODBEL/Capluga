@@ -1,0 +1,889 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CAPLUGAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppointmentScheduling">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="AddressID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ScheduleID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterPurchaseID" Type="bigint" Nullable="false" />
+          <Property Name="MedicalImplementsID" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MedicalImplementsID" Type="bigint" Nullable="false" />
+          <Property Name="PaidPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaidQuantity" Type="int" Nullable="false" />
+          <Property Name="Tax" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MasterPurchaseID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="ErrorMessage" Type="varchar(max)" Nullable="false" />
+          <Property Name="Source" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AdditionalInformation" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MasterPurchase">
+          <Key>
+            <PropertyRef Name="MasterPurchaseID" />
+          </Key>
+          <Property Name="MasterPurchaseID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+          <Property Name="TotalPurchase" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicalCourses">
+          <Key>
+            <PropertyRef Name="MedicalCourseID" />
+          </Key>
+          <Property Name="MedicalCourseID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedByUserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicalImplements">
+          <Key>
+            <PropertyRef Name="MedicalImplementsID" />
+          </Key>
+          <Property Name="MedicalImplementsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolesID" />
+          </Key>
+          <Property Name="RolesID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduleAppointment">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateandTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surnames" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="Age" Type="date" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RolesID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Addresses__UserI__3C69FB99">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Addre__5441852A">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
+          <End Role="AppointmentScheduling" Type="Self.AppointmentScheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="AppointmentScheduling">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Sched__534D60F1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AppointmentScheduling" Type="Self.AppointmentScheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AppointmentScheduling">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Sched__5535A963">
+          <End Role="ScheduleAppointment" Type="Self.ScheduleAppointment" Multiplicity="1" />
+          <End Role="AppointmentScheduling" Type="Self.AppointmentScheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleAppointment">
+              <PropertyRef Name="ScheduleID" />
+            </Principal>
+            <Dependent Role="AppointmentScheduling">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__MasterPurc__46E78A0C">
+          <End Role="MasterPurchase" Type="Self.MasterPurchase" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterPurchase">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__MedicalImp__47DBAE45">
+          <End Role="MedicalImplements" Type="Self.MedicalImplements" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalImplements">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detail__MasterPu__4BAC3F29">
+          <End Role="MasterPurchase" Type="Self.MasterPurchase" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterPurchase">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detail__MedicalI__4AB81AF0">
+          <End Role="MedicalImplements" Type="Self.MedicalImplements" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalImplements">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ErrorLogs__UserI__4E88ABD4">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ErrorLogs" Type="Self.ErrorLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ErrorLogs">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MasterPur__UserI__440B1D61">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="MasterPurchase" Type="Self.MasterPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MasterPurchase">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MedicalCo__Creat__3F466844">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="MedicalCourses" Type="Self.MedicalCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MedicalCourses">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RolesID__398D8EEE">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolesID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RolesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="InsertAppointment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="AddressID" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScheduleID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="InsertScheduleAppointment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Dname" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateandTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateAppointment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppointmentID" Type="bigint" Mode="In" />
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
+          <Parameter Name="AddressID" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScheduleID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UpdateScheduleAppointment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ScheduleID" Type="bigint" Mode="In" />
+          <Parameter Name="DName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateandTime" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="CAPLUGAModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppointmentScheduling" EntityType="Self.AppointmentScheduling" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterPurchase" EntityType="Self.MasterPurchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalCourses" EntityType="Self.MedicalCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalImplements" EntityType="Self.MedicalImplements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleAppointment" EntityType="Self.ScheduleAppointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Addresses__UserI__3C69FB99" Association="Self.FK__Addresses__UserI__3C69FB99">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Addre__5441852A" Association="Self.FK__Appointme__Addre__5441852A">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="AppointmentScheduling" EntitySet="AppointmentScheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Sched__534D60F1" Association="Self.FK__Appointme__Sched__534D60F1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AppointmentScheduling" EntitySet="AppointmentScheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Sched__5535A963" Association="Self.FK__Appointme__Sched__5535A963">
+            <End Role="ScheduleAppointment" EntitySet="ScheduleAppointment" />
+            <End Role="AppointmentScheduling" EntitySet="AppointmentScheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__MasterPurc__46E78A0C" Association="Self.FK__Cart__MasterPurc__46E78A0C">
+            <End Role="MasterPurchase" EntitySet="MasterPurchase" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__MedicalImp__47DBAE45" Association="Self.FK__Cart__MedicalImp__47DBAE45">
+            <End Role="MedicalImplements" EntitySet="MedicalImplements" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detail__MasterPu__4BAC3F29" Association="Self.FK__Detail__MasterPu__4BAC3F29">
+            <End Role="MasterPurchase" EntitySet="MasterPurchase" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detail__MedicalI__4AB81AF0" Association="Self.FK__Detail__MedicalI__4AB81AF0">
+            <End Role="MedicalImplements" EntitySet="MedicalImplements" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ErrorLogs__UserI__4E88ABD4" Association="Self.FK__ErrorLogs__UserI__4E88ABD4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ErrorLogs" EntitySet="ErrorLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MasterPur__UserI__440B1D61" Association="Self.FK__MasterPur__UserI__440B1D61">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MasterPurchase" EntitySet="MasterPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MedicalCo__Creat__3F466844" Association="Self.FK__MedicalCo__Creat__3F466844">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MedicalCourses" EntitySet="MedicalCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RolesID__398D8EEE" Association="Self.FK__Users__RolesID__398D8EEE">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CAPLUGAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Addresses__UserI__3C69FB99" FromRole="Addresses" ToRole="Users" />
+          <NavigationProperty Name="AppointmentScheduling" Relationship="Self.FK__Appointme__Addre__5441852A" FromRole="Addresses" ToRole="AppointmentScheduling" />
+        </EntityType>
+        <EntityType Name="AppointmentScheduling">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="AddressID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScheduleID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK__Appointme__Addre__5441852A" FromRole="AppointmentScheduling" ToRole="Addresses" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Appointme__Sched__534D60F1" FromRole="AppointmentScheduling" ToRole="Users" />
+          <NavigationProperty Name="ScheduleAppointment" Relationship="Self.FK__Appointme__Sched__5535A963" FromRole="AppointmentScheduling" ToRole="ScheduleAppointment" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterPurchaseID" Type="Int64" Nullable="false" />
+          <Property Name="MedicalImplementsID" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MasterPurchase" Relationship="Self.FK__Cart__MasterPurc__46E78A0C" FromRole="Cart" ToRole="MasterPurchase" />
+          <NavigationProperty Name="MedicalImplements" Relationship="Self.FK__Cart__MedicalImp__47DBAE45" FromRole="Cart" ToRole="MedicalImplements" />
+        </EntityType>
+        <EntityType Name="Detail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedicalImplementsID" Type="Int64" Nullable="false" />
+          <Property Name="PaidPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaidQuantity" Type="Int32" Nullable="false" />
+          <Property Name="Tax" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MasterPurchaseID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="MasterPurchase" Relationship="Self.FK__Detail__MasterPu__4BAC3F29" FromRole="Detail" ToRole="MasterPurchase" />
+          <NavigationProperty Name="MedicalImplements" Relationship="Self.FK__Detail__MedicalI__4AB81AF0" FromRole="Detail" ToRole="MedicalImplements" />
+        </EntityType>
+        <EntityType Name="ErrorLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdditionalInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__ErrorLogs__UserI__4E88ABD4" FromRole="ErrorLogs" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MasterPurchase">
+          <Key>
+            <PropertyRef Name="MasterPurchaseID" />
+          </Key>
+          <Property Name="MasterPurchaseID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalPurchase" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__MasterPurc__46E78A0C" FromRole="MasterPurchase" ToRole="Cart" />
+          <NavigationProperty Name="Detail" Relationship="Self.FK__Detail__MasterPu__4BAC3F29" FromRole="MasterPurchase" ToRole="Detail" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__MasterPur__UserI__440B1D61" FromRole="MasterPurchase" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MedicalCourses">
+          <Key>
+            <PropertyRef Name="MedicalCourseID" />
+          </Key>
+          <Property Name="MedicalCourseID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedByUserID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__MedicalCo__Creat__3F466844" FromRole="MedicalCourses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MedicalImplements">
+          <Key>
+            <PropertyRef Name="MedicalImplementsID" />
+          </Key>
+          <Property Name="MedicalImplementsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK__Cart__MedicalImp__47DBAE45" FromRole="MedicalImplements" ToRole="Cart" />
+          <NavigationProperty Name="Detail" Relationship="Self.FK__Detail__MedicalI__4AB81AF0" FromRole="MedicalImplements" ToRole="Detail" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolesID" />
+          </Key>
+          <Property Name="RolesID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RolesID__398D8EEE" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ScheduleAppointment">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateandTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AppointmentScheduling" Relationship="Self.FK__Appointme__Sched__5535A963" FromRole="ScheduleAppointment" ToRole="AppointmentScheduling" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surnames" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="Age" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RolesID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK__Addresses__UserI__3C69FB99" FromRole="Users" ToRole="Addresses" />
+          <NavigationProperty Name="AppointmentScheduling" Relationship="Self.FK__Appointme__Sched__534D60F1" FromRole="Users" ToRole="AppointmentScheduling" />
+          <NavigationProperty Name="ErrorLogs" Relationship="Self.FK__ErrorLogs__UserI__4E88ABD4" FromRole="Users" ToRole="ErrorLogs" />
+          <NavigationProperty Name="MasterPurchase" Relationship="Self.FK__MasterPur__UserI__440B1D61" FromRole="Users" ToRole="MasterPurchase" />
+          <NavigationProperty Name="MedicalCourses" Relationship="Self.FK__MedicalCo__Creat__3F466844" FromRole="Users" ToRole="MedicalCourses" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RolesID__398D8EEE" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK__Addresses__UserI__3C69FB99">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Addre__5441852A">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
+          <End Role="AppointmentScheduling" Type="Self.AppointmentScheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="AppointmentScheduling">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Sched__534D60F1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AppointmentScheduling" Type="Self.AppointmentScheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AppointmentScheduling">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Sched__5535A963">
+          <End Role="ScheduleAppointment" Type="Self.ScheduleAppointment" Multiplicity="1" />
+          <End Role="AppointmentScheduling" Type="Self.AppointmentScheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleAppointment">
+              <PropertyRef Name="ScheduleID" />
+            </Principal>
+            <Dependent Role="AppointmentScheduling">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__MasterPurc__46E78A0C">
+          <End Role="MasterPurchase" Type="Self.MasterPurchase" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterPurchase">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__MedicalImp__47DBAE45">
+          <End Role="MedicalImplements" Type="Self.MedicalImplements" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalImplements">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detail__MasterPu__4BAC3F29">
+          <End Role="MasterPurchase" Type="Self.MasterPurchase" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterPurchase">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="MasterPurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detail__MedicalI__4AB81AF0">
+          <End Role="MedicalImplements" Type="Self.MedicalImplements" Multiplicity="1" />
+          <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalImplements">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Principal>
+            <Dependent Role="Detail">
+              <PropertyRef Name="MedicalImplementsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ErrorLogs__UserI__4E88ABD4">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ErrorLogs" Type="Self.ErrorLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ErrorLogs">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MasterPur__UserI__440B1D61">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="MasterPurchase" Type="Self.MasterPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MasterPurchase">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MedicalCo__Creat__3F466844">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="MedicalCourses" Type="Self.MedicalCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MedicalCourses">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RolesID__398D8EEE">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolesID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RolesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CAPLUGAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" />
+          <EntitySet Name="AppointmentScheduling" EntityType="Self.AppointmentScheduling" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" />
+          <EntitySet Name="Detail" EntityType="Self.Detail" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLogs" />
+          <EntitySet Name="MasterPurchase" EntityType="Self.MasterPurchase" />
+          <EntitySet Name="MedicalCourses" EntityType="Self.MedicalCourses" />
+          <EntitySet Name="MedicalImplements" EntityType="Self.MedicalImplements" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="ScheduleAppointment" EntityType="Self.ScheduleAppointment" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Addresses__UserI__3C69FB99" Association="Self.FK__Addresses__UserI__3C69FB99">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Addre__5441852A" Association="Self.FK__Appointme__Addre__5441852A">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="AppointmentScheduling" EntitySet="AppointmentScheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Sched__534D60F1" Association="Self.FK__Appointme__Sched__534D60F1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AppointmentScheduling" EntitySet="AppointmentScheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Sched__5535A963" Association="Self.FK__Appointme__Sched__5535A963">
+            <End Role="ScheduleAppointment" EntitySet="ScheduleAppointment" />
+            <End Role="AppointmentScheduling" EntitySet="AppointmentScheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__MasterPurc__46E78A0C" Association="Self.FK__Cart__MasterPurc__46E78A0C">
+            <End Role="MasterPurchase" EntitySet="MasterPurchase" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__MedicalImp__47DBAE45" Association="Self.FK__Cart__MedicalImp__47DBAE45">
+            <End Role="MedicalImplements" EntitySet="MedicalImplements" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detail__MasterPu__4BAC3F29" Association="Self.FK__Detail__MasterPu__4BAC3F29">
+            <End Role="MasterPurchase" EntitySet="MasterPurchase" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detail__MedicalI__4AB81AF0" Association="Self.FK__Detail__MedicalI__4AB81AF0">
+            <End Role="MedicalImplements" EntitySet="MedicalImplements" />
+            <End Role="Detail" EntitySet="Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ErrorLogs__UserI__4E88ABD4" Association="Self.FK__ErrorLogs__UserI__4E88ABD4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ErrorLogs" EntitySet="ErrorLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MasterPur__UserI__440B1D61" Association="Self.FK__MasterPur__UserI__440B1D61">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MasterPurchase" EntitySet="MasterPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MedicalCo__Creat__3F466844" Association="Self.FK__MedicalCo__Creat__3F466844">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MedicalCourses" EntitySet="MedicalCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RolesID__398D8EEE" Association="Self.FK__Users__RolesID__398D8EEE">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="InsertAppointment">
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="AddressID" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ScheduleID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="InsertScheduleAppointment">
+            <Parameter Name="Dname" Mode="In" Type="String" />
+            <Parameter Name="DateandTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateScheduleAppointment">
+            <Parameter Name="ScheduleID" Mode="In" Type="Int64" />
+            <Parameter Name="DName" Mode="In" Type="String" />
+            <Parameter Name="DateandTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAppointment">
+            <Parameter Name="AppointmentID" Mode="In" Type="Int64" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="AddressID" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ScheduleID" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CAPLUGAModelStoreContainer" CdmEntityContainer="CAPLUGAEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="CAPLUGAModel.Addresses">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentScheduling">
+            <EntityTypeMapping TypeName="CAPLUGAModel.AppointmentScheduling">
+              <MappingFragment StoreEntitySet="AppointmentScheduling">
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="CAPLUGAModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="MasterPurchaseID" ColumnName="MasterPurchaseID" />
+                <ScalarProperty Name="MedicalImplementsID" ColumnName="MedicalImplementsID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detail">
+            <EntityTypeMapping TypeName="CAPLUGAModel.Detail">
+              <MappingFragment StoreEntitySet="Detail">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="MedicalImplementsID" ColumnName="MedicalImplementsID" />
+                <ScalarProperty Name="PaidPrice" ColumnName="PaidPrice" />
+                <ScalarProperty Name="PaidQuantity" ColumnName="PaidQuantity" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="MasterPurchaseID" ColumnName="MasterPurchaseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="CAPLUGAModel.ErrorLogs">
+              <MappingFragment StoreEntitySet="ErrorLogs">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="AdditionalInformation" ColumnName="AdditionalInformation" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterPurchase">
+            <EntityTypeMapping TypeName="CAPLUGAModel.MasterPurchase">
+              <MappingFragment StoreEntitySet="MasterPurchase">
+                <ScalarProperty Name="MasterPurchaseID" ColumnName="MasterPurchaseID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="TotalPurchase" ColumnName="TotalPurchase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalCourses">
+            <EntityTypeMapping TypeName="CAPLUGAModel.MedicalCourses">
+              <MappingFragment StoreEntitySet="MedicalCourses">
+                <ScalarProperty Name="MedicalCourseID" ColumnName="MedicalCourseID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalImplements">
+            <EntityTypeMapping TypeName="CAPLUGAModel.MedicalImplements">
+              <MappingFragment StoreEntitySet="MedicalImplements">
+                <ScalarProperty Name="MedicalImplementsID" ColumnName="MedicalImplementsID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="CAPLUGAModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RolesID" ColumnName="RolesID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleAppointment">
+            <EntityTypeMapping TypeName="CAPLUGAModel.ScheduleAppointment">
+              <MappingFragment StoreEntitySet="ScheduleAppointment">
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="Dname" ColumnName="Dname" />
+                <ScalarProperty Name="DateandTime" ColumnName="DateandTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CAPLUGAModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surnames" ColumnName="Surnames" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="RolesID" ColumnName="RolesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertAppointment" FunctionName="CAPLUGAModel.Store.InsertAppointment" />
+          <FunctionImportMapping FunctionImportName="InsertScheduleAppointment" FunctionName="CAPLUGAModel.Store.InsertScheduleAppointment" />
+          <FunctionImportMapping FunctionImportName="UpdateScheduleAppointment" FunctionName="CAPLUGAModel.Store.UpdateScheduleAppointment" />
+          <FunctionImportMapping FunctionImportName="UpdateAppointment" FunctionName="CAPLUGAModel.Store.UpdateAppointment" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
