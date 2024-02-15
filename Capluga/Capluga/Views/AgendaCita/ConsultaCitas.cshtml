@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Capluga.Entities.AgendaEnt>
+@{
+    ViewBag.Title = "Consulta Citas";
+    Layout = "~/Views/Shared/_LayoutAdm.cshtml";
+}
+<link rel="stylesheet" href="~/Template/styles/bootstrap4/ConsultaH.css">
+
+<h2>Citas Registradas</h2>
+<div class="container">
+    <table id="horariosTable" class="display" style="width:150%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID User</th>
+                <th>ID Direccion</th>
+                <th>Asunto</th>
+                <th>Descripcion</th>
+                <th>ID Horario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.AppointmentID</td>
+                    <td>@item.UserID</td>
+                    <td>@item.AddressID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.ScheduleID</td>
+                    <td>
+                        <!-- Acciones como editar o eliminar -->
+                        <a href="@Url.Action("Actualizarcita", "AgendaCita", new { q = item.AppointmentID })" class="btn btn-primary">Editar</a>
+
+
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

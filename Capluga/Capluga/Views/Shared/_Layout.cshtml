@@ -19,80 +19,80 @@
     <div class="super_container">
 
         <!-- Encabezado -->
+        <section>
+            <header class="header trans_200">
 
-        <header class="header trans_200">
+                <!-- Barra superior -->
+                <div class="top_bar">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                                    <div class="top_bar_item"><a href="@Url.Action("ConsultaHorarios","CitaHorario")">Administracion</a></div>
 
-            <!-- Barra superior -->
-            <div class="top_bar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-                                <div class="top_bar_item"><a href="#">Preguntas frecuentes</a></div>
-                             
-                                <div class="emergencies  d-flex flex-row align-items-center justify-content-start ml-auto">Para emergencias: +563 47558 623</div>
+                                    <div class="emergencies  d-flex flex-row align-items-center justify-content-start ml-auto">Para emergencias: +563 47558 623</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Contenido del encabezado -->
-            <div class="header_container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                                <nav class="main_nav ml-auto">
-                                    <ul>
-                                        <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
-                                        <li><a href="@Url.Action("About","Home")">Acerca de nosotros</a></li>
-                                        <li><a href="@Url.Action("services","Home")">Cursos</a></li>
-                                        <li><a href="@Url.Action("Productos","Home")">Venta Equipo Médico</a></li>
-                                        <li><a href="@Url.Action("Contact","Home")">Contacto</a></li>
-                                    </ul>
-                                </nav>
-                                <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                <!-- Contenido del encabezado -->
+                <div class="header_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                                    <nav class="main_nav ml-auto">
+                                        <ul>
+                                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                                            <li><a href="@Url.Action("About","Home")">Acerca de nosotros</a></li>
+                                            <li><a href="@Url.Action("services","Home")">Cursos</a></li>
+                                            <li><a href="@Url.Action("Productos","Home")">Venta Equipo Médico</a></li>
+                                            <li><a href="@Url.Action("RegistrarCita","AgendaCita")">Agendar Cita</a></li>
+                                        </ul>
+                                    </nav>
+                                    <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Logo -->
-            <div class="logo_container_outer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="logo_container">
-                                <a href="@Url.Action("Index","Home")">
-                                    <div class="logo_content d-flex flex-column align-items-start justify-content-center">
-                                        <div class="logo_line"></div>
-                                        <div class="logo d-flex flex-row align-items-center justify-content-center">
-                                            <div class="logo_text">CAP<span>LUGA</span></div>
-                                            <div class="logo_box">+</div>
+                <!-- Logo -->
+                <div class="logo_container_outer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="logo_container">
+                                    <a href="@Url.Action("Index","Home")">
+                                        <div class="logo_content d-flex flex-column align-items-start justify-content-center">
+                                            <div class="logo_line"></div>
+                                            <div class="logo d-flex flex-row align-items-center justify-content-center">
+                                                <div class="logo_text">CAP<span>LUGA</span></div>
+                                                <div class="logo_box">+</div>
+                                            </div>
+                                            <div class="logo_sub">Centro de atención médica</div>
                                         </div>
-                                        <div class="logo_sub">Centro de atención médica</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </header>
+            </header>
+        </section>
 
-      
 
-        
-     
 
+
+        <section>
 
 
         @RenderBody()
 
-
+        </section>
 
 
 
@@ -196,6 +196,17 @@
             </div>
         </footer>
     </div>
+
+
+    <!-- Importa React y React DOM -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Importa tu componente React -->
+    <script type="module" src="path/to/Slider.js"></script>
+
+    <!-- ... Resto de tu HTML -->
+
 
     <script src="~/Template/js/jquery-3.2.1.min.js"></script>
     <script src="~/Template/styles/bootstrap4/popper.js"></script>
