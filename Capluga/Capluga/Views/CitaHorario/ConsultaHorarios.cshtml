@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Capluga.Entities.HorarioEnt>
+@{
+    ViewBag.Title = "Consulta Horarios";
+    Layout = "~/Views/Shared/_LayoutAdm.cshtml";
+}
+<link rel="stylesheet" href="~/Template/styles/bootstrap4/ConsultaH.css">
+
+<h2>Horarios Registrados</h2>
+<div class="container">
+    <table id="horariosTable" class="display" style="width:150%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Horario</th>
+                <th>Fecha y Hora</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var horario in Model)
+            {
+                <tr>
+                    <td>@horario.ScheduleID</td>
+                    <td>@horario.Dname</td>
+                    <td>@horario.DateandTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <!-- Acciones como editar o eliminar -->
+                        <a href="@Url.Action("ActualizarHorarios", "CitaHorario", new { q = horario.ScheduleID })" class="btn btn-primary">Editar</a>
+
+
+                        <a href="@Url.Action("RegistrarHorarios", "CitaHorario", new { id = horario.ScheduleID })" class="btn btn-success">Registrar Horario</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
