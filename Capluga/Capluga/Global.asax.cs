@@ -20,6 +20,9 @@ namespace Capluga
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // Registra los componentes de Unity
+            UnityConfig.RegisterComponents();
         }
     }
 }

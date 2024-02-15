@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Capluga.Models.User>
+
+@{
+    ViewBag.Title = "Lista de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuarios</h2>
+
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => user.Name)</td>
+            <td>@Html.DisplayFor(modelItem => user.Email)</td>
+            <td>
+                @Html.ActionLink("Editar", "EditUser", new { id = user.UserID }) |
+                @Html.ActionLink("Eliminar", "DeleteUser", new { id = user.UserID }, new { onclick = "return confirm('¿Está seguro de que desea eliminar este usuario?');" })
+            </td>
+        </tr>
+    }
+</table>

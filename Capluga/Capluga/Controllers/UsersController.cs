@@ -1,18 +1,22 @@
 ﻿using Capluga.Models;
-using System.Web.Mvc; // Asegúrate de tener el namespace correcto para MVC
-using System.Linq;
-using System;
+using Capluga.Services.Interfaces;
+using System.Web.Mvc;
 
 namespace Capluga.Controllers
 {
     public class UsersController : Controller
     {
-        // Contexto de base de datos (asumiendo que tienes uno configurado)
-        private readonly CaplugaDbContext _context;
+        private readonly IUserService _userService;
 
-        public UsersController(CaplugaDbContext context)
+        // El constructor ahora recibe la interfaz del servicio
+        public UsersController(IUserService userService) => _userService = userService;
+
+        // Listar usuarios (Para visualización, parte de REQ4 y REQ5)
+        [HttpGet]
+        public ActionResult Index()
         {
-            _context = context;
+            var users = _userService.GetAllUsers();
+            return View(users);
         }
 
         // Agregar usuario (REQ4 y REQ5)
@@ -21,8 +25,7 @@ namespace Capluga.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Users.Add(user);
-                _context.SaveChanges();
+                _userService.AddUser(user);
                 return RedirectToAction("Index"); // Redirige a la vista principal de usuarios
             }
             return View(user); // Vuelve a mostrar el formulario si no es válido
@@ -34,8 +37,7 @@ namespace Capluga.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(user).State = System.Data.Entity.EntityState.Modified;
-                _context.SaveChanges();
+                _userService.UpdateUser(user);
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -45,21 +47,23 @@ namespace Capluga.Controllers
         [HttpPost]
         public ActionResult ToggleUserState(long userId)
         {
-            var user = _context.Users.Find(userId);
-            if (user != null)
+            if (_userService.UserExists(userId))
             {
-                user.State = !user.State;
-                _context.SaveChanges();
+                _userService.ToggleUserState(userId);
                 return RedirectToAction("Index");
             }
             return HttpNotFound();
         }
 
+        // Las acciones de recuperación de contraseña y de inicio de sesión seguro deben implementarse en el servicio
+        // y luego invocarse desde aquí.
+
         // Recuperar contraseña (REQ2)
         [HttpPost]
         public ActionResult RecoverPassword(string email)
         {
-            // Implementar lógica de recuperación aquí
+            // Aquí invocarías un método del servicio, por ejemplo:
+            // _userService.RecoverPassword(email);
             return View();
         }
 
@@ -67,15 +71,11 @@ namespace Capluga.Controllers
         [HttpPost]
         public ActionResult SecureLogin(string email, string password)
         {
-            // Implementar lógica de inicio de sesión aquí
+            // Aquí invocarías un método del servicio, por ejemplo:
+            // var user = _userService.SecureLogin(email, password);
             return View();
         }
 
-        // Listar usuarios (Para visualización, parte de REQ4 y REQ5)
-        public ActionResult Index()
-        {
-            var users = _context.Users.ToList();
-            return View(users);
-        }
+        // ... otras acciones
     }
 }

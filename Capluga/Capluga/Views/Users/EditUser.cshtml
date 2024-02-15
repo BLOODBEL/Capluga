@@ -1,0 +1,25 @@
+﻿@model Capluga.Models.User
+
+@{
+    ViewBag.Title = "Editar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Usuario</h2>
+
+@using (Html.BeginForm("EditUser", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.UserID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <!-- Agregar campos adicionales aquí -->
+
+    <button type="submit" class="btn btn-success">Actualizar</button>
+}

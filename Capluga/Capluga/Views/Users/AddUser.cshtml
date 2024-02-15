@@ -1,0 +1,23 @@
+﻿@model Capluga.Models.User
+
+@{
+    ViewBag.Title = "Agregar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Agregar Usuario</h2>
+
+@using (Html.BeginForm("AddUser", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <!-- Agregar campos adicionales aquí -->
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+}
