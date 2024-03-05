@@ -120,10 +120,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AgendaCitaController.cs" />
+    <Compile Include="Controllers\CitaHorarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Entities\AgendaEnt.cs" />
+    <Compile Include="Entities\HorarioEnt.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AgendaCitaModel.cs" />
+    <Compile Include="Models\CitaHorarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +158,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -295,10 +302,18 @@
     <Content Include="Template\plugins\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="Views\Home\Productos.cshtml" />
     <Content Include="Views\Home\services.cshtml" />
+    <Content Include="Views\AgendaCita\Actualizarcita.cshtml" />
+    <Content Include="Views\AgendaCita\ConsultaCitas.cshtml" />
+    <Content Include="Views\AgendaCita\RegistrarCita.cshtml" />
+    <Content Include="Views\CitaHorario\ActualizarHorarios.cshtml" />
+    <Content Include="Views\CitaHorario\ConsultaHorarios.cshtml" />
+    <Content Include="Views\CitaHorario\RegistrarHorarios.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="bin\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
