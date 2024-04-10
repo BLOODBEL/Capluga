@@ -15,11 +15,11 @@ namespace CaplugaAPI
     public partial class Cart
     {
         public long CartID { get; set; }
-        public long MasterPurchaseID { get; set; }
         public long MedicalImplementsID { get; set; }
         public int Quantity { get; set; }
+        public long UserID { get; set; }
     
-        public virtual MasterPurchase MasterPurchase { get; set; }
         public virtual MedicalImplements MedicalImplements { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -8,19 +8,16 @@ namespace CaplugaAPI.Entities
 {
     public class AgendaEnt
     {
+
         public long AppointmentID { get; set; }
-
         public long UserID { get; set; }
+        public long AddressID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public long ScheduleID { get; set; }
 
-            public long ScheduleID { get; set; }
-
-            public long AddressID { get; set; }
-
-            public string Name { get; set; }
-
-            public string Description { get; set; }
-
-        
-    }
+        public ScheduleAppointment Schedule { get; set; } // Relación con ScheduleAppointment
 
     }
+
+}

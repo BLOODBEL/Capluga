@@ -17,7 +17,6 @@ namespace CaplugaAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MasterPurchase()
         {
-            this.Cart = new HashSet<Cart>();
             this.Detail = new HashSet<Detail>();
         }
     
@@ -26,8 +25,6 @@ namespace CaplugaAPI
         public System.DateTime PurchaseDate { get; set; }
         public decimal TotalPurchase { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detail> Detail { get; set; }
         public virtual Users Users { get; set; }

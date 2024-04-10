@@ -34,6 +34,7 @@ main {
 
 /* Ajustes para inputs y botones */
 .form-control {
+
     border-radius: 20px;
     padding: .375rem .75rem;
 }
@@ -166,4 +167,3 @@ main {
         margin-top: 10px;
     }
 }
-

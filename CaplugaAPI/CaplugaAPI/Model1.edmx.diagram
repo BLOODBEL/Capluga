@@ -4,29 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4d0af24f922746faa2aba0f66a5de4ab" Name="Diagram1">
-        <EntityTypeShape EntityType="CAPLUGAModel.Addresses" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.AppointmentScheduling" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.Cart" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.Detail" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.ErrorLogs" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.MasterPurchase" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.MedicalCourses" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.MedicalImplements" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.Roles" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.ScheduleAppointment" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CAPLUGAModel.Users" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <AssociationConnector Association="CAPLUGAModel.FK__Addresses__UserI__3C69FB99" ManuallyRouted="false" />
+      <Diagram DiagramId="da469804d6444ce285caddfa0eb70077" Name="Diagram1">
+        <EntityTypeShape EntityType="CAPLUGAModel.Addresses" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.AppointmentScheduling" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.Cart" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.Detail" Width="1.5" PointX="10.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.ErrorLogs" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.MasterPurchase" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.MedicalCourses" Width="1.5" PointX="9" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.MedicalImplements" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.Registeredcourses" Width="1.5" PointX="11.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.Roles" Width="1.5" PointX="3.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.ScheduleAppointment" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAPLUGAModel.Users" Width="1.5" PointX="6" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="CAPLUGAModel.FK__Appointme__Addre__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="CAPLUGAModel.FK_Users_Addresses" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__Appointme__Sched__534D60F1" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__Appointme__Sched__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="CAPLUGAModel.FK__Cart__MasterPurc__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="CAPLUGAModel.FK__Cart__MedicalImp__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="CAPLUGAModel.FK__Cart__MedicalImp__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="CAPLUGAModel.FK_Cart_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__Detail__MasterPu__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__Detail__MedicalI__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__ErrorLogs__UserI__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__MasterPur__UserI__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="CAPLUGAModel.FK__MedicalCo__Creat__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="CAPLUGAModel.FK_Registeredcourses_MedicalCourses" ManuallyRouted="false" />
+        <AssociationConnector Association="CAPLUGAModel.FK_Registeredcourses_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CAPLUGAModel.FK__Users__RolesID__398D8EEE" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
