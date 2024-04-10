@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,16 +15,23 @@ namespace Capluga.Models
     {
         public string rutaServidor = ConfigurationManager.AppSettings["RutaApi"];
 
-
-     
-        public string RegistrarCita(AgendaEnt entidad)
+        public async Task<string> RegistrarCita(AgendaEnt entidad)
         {
             using (var client = new HttpClient())
             {
                 var urlApi = rutaServidor + "RegistrarCita";
                 var jsonData = JsonContent.Create(entidad);
-                var res = client.PostAsync(urlApi, jsonData).Result;
-                return res.Content.ReadFromJsonAsync<string>().Result;
+                var res = await client.PostAsync(urlApi, jsonData);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return await res.Content.ReadFromJsonAsync<string>();
+                }
+                else
+                {
+                    // Manejo adecuado de errores HTTP
+                    return $"Error: {res.StatusCode}";
+                }
             }
         }
 

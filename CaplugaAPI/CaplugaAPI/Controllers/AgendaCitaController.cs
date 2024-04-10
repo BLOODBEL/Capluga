@@ -10,27 +10,34 @@ namespace CaplugaAPI.Controllers
 {
     public class AgendaCitaController : ApiController
     {
+
         [HttpPost]
         [Route("RegistrarCita")]
-        public string RegistrarCita(AgendaEnt entidad)
+        public string RegistrarCita(AppointmentScheduling appointmentScheduling)
         {
-            try
+            using (var context = new CAPLUGAEntities())
             {
-                using (var context = new CAPLUGAEntities())
+                var datos = (from x in context.AppointmentScheduling
+                             where x.UserID == appointmentScheduling.UserID
+                                && x.AddressID == appointmentScheduling.AddressID
+                                && x.ScheduleID == appointmentScheduling.ScheduleID
+                             select x).FirstOrDefault();
+                if (datos == null)
                 {
-                  
-                    context.InsertAppointment(entidad.UserID,entidad.AddressID, entidad.Name, entidad.Description, entidad.ScheduleID);
-                    
-                    return "Cita registrada con éxito.";
+                    AppointmentScheduling appointment = new AppointmentScheduling();
+                    appointment.UserID = appointmentScheduling.UserID;
+                    appointment.AddressID = appointmentScheduling.AddressID;
+                    appointment.ScheduleID = appointmentScheduling.ScheduleID;
+                    appointment.Name = appointmentScheduling.Name;
+                    appointment.Description = appointmentScheduling.Description;
+                    context.AppointmentScheduling.Add(appointment);
+                    context.SaveChanges();
                 }
-            }
-            catch (Exception)
-            {
-
-                return string.Empty;
+               
+                return "OK";
             }
         }
-
+        
         [HttpGet]
         [Route("ConsultaCitas")]
         public List<AppointmentScheduling> ConsultaCitas()

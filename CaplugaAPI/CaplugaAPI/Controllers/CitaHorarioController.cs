@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CaplugaAPI.Controllers
@@ -88,7 +89,7 @@ namespace CaplugaAPI.Controllers
             }
         }
 
-          [HttpGet]
+        [HttpGet]
         [Route("verHorarios")]
         public List<System.Web.Mvc.SelectListItem> verHorarios()
         {
@@ -102,13 +103,13 @@ namespace CaplugaAPI.Controllers
                     List<System.Web.Mvc.SelectListItem> horarios = new List<System.Web.Mvc.SelectListItem>();
                     foreach (var item in datos)
                     {
-                        string displayText = $"{item.Dname} - {item.DateandTime.ToString("dd/MM/yyyy HH:mm")}"; 
+                        string displayText = $"{item.Dname} - {item.DateandTime.ToString("dd/MM/yyyy HH:mm")}";
 
                         horarios.Add(new System.Web.Mvc.SelectListItem
                         {
                             Value = item.ScheduleID.ToString(),
                             Text = displayText
-                          
+
                         });
                     }
 
@@ -122,3 +123,4 @@ namespace CaplugaAPI.Controllers
         }
     }
 }
+
