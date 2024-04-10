@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Capluga.Entities.InscripCursEnt>
+
+@{
+    ViewBag.Title = "ConsultaInscripciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center">Información del Carrito</h2>
+
+            @if (Model.Any())
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>SubTotal</th>
+                            <th>Impuesto</th>
+                            <th>Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price.ToString("C", new System.Globalization.CultureInfo("es-CR"))</td>
+                                <td>@item.SubTotal.ToString("C", new System.Globalization.CultureInfo("es-CR"))</td>
+                                <td>@item.Impuesto.ToString("C", new System.Globalization.CultureInfo("es-CR"))</td>
+                                <td>@item.Total.ToString("C", new System.Globalization.CultureInfo("es-CR"))</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("EliminarRegistroCurso", "Registeredcourses", new { q = item.RegisteredcoursesID })" class="btn btn-danger btn-sm">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+            else
+            {
+                <div class="alert alert-info" role="alert">
+                    No hay productos agregados en este momento.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableShow').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+
+

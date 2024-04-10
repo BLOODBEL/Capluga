@@ -17,15 +17,15 @@ namespace CaplugaAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
-            this.Addresses = new HashSet<Addresses>();
             this.AppointmentScheduling = new HashSet<AppointmentScheduling>();
+            this.Cart = new HashSet<Cart>();
             this.ErrorLogs = new HashSet<ErrorLogs>();
             this.MasterPurchase = new HashSet<MasterPurchase>();
-            this.MedicalCourses = new HashSet<MedicalCourses>();
+            this.Registeredcourses = new HashSet<Registeredcourses>();
         }
     
         public long UserID { get; set; }
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string Surnames { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -34,17 +34,19 @@ namespace CaplugaAPI
         public System.DateTime Age { get; set; }
         public string PhoneNumber { get; set; }
         public long RolesID { get; set; }
+        public Nullable<long> AddressID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Addresses> Addresses { get; set; }
+        public virtual Addresses Addresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentScheduling> AppointmentScheduling { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ErrorLogs> ErrorLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterPurchase> MasterPurchase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedicalCourses> MedicalCourses { get; set; }
+        public virtual ICollection<Registeredcourses> Registeredcourses { get; set; }
         public virtual Roles Roles { get; set; }
     }
 }

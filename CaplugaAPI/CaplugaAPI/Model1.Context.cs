@@ -35,9 +35,19 @@ namespace CaplugaAPI
         public virtual DbSet<MasterPurchase> MasterPurchase { get; set; }
         public virtual DbSet<MedicalCourses> MedicalCourses { get; set; }
         public virtual DbSet<MedicalImplements> MedicalImplements { get; set; }
+        public virtual DbSet<Registeredcourses> Registeredcourses { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<ScheduleAppointment> ScheduleAppointment { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+    
+        public virtual int ApprovePaymentDetails(Nullable<long> masterPurchaseID)
+        {
+            var masterPurchaseIDParameter = masterPurchaseID.HasValue ?
+                new ObjectParameter("MasterPurchaseID", masterPurchaseID) :
+                new ObjectParameter("MasterPurchaseID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ApprovePaymentDetails", masterPurchaseIDParameter);
+        }
     
         public virtual int InsertAppointment(Nullable<long> userID, Nullable<long> addressID, string name, string description, Nullable<long> scheduleID)
         {
@@ -77,21 +87,13 @@ namespace CaplugaAPI
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertScheduleAppointment", dnameParameter, dateandTimeParameter);
         }
     
-        public virtual int UpdateScheduleAppointment(Nullable<long> scheduleID, string dName, Nullable<System.DateTime> dateandTime)
+        public virtual int PayCart(Nullable<long> userID)
         {
-            var scheduleIDParameter = scheduleID.HasValue ?
-                new ObjectParameter("ScheduleID", scheduleID) :
-                new ObjectParameter("ScheduleID", typeof(long));
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(long));
     
-            var dNameParameter = dName != null ?
-                new ObjectParameter("DName", dName) :
-                new ObjectParameter("DName", typeof(string));
-    
-            var dateandTimeParameter = dateandTime.HasValue ?
-                new ObjectParameter("DateandTime", dateandTime) :
-                new ObjectParameter("DateandTime", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateScheduleAppointment", scheduleIDParameter, dNameParameter, dateandTimeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PayCart", userIDParameter);
         }
     
         public virtual int UpdateAppointment(Nullable<long> appointmentID, Nullable<long> userID, Nullable<long> addressID, string name, string description, Nullable<long> scheduleID)
@@ -121,6 +123,23 @@ namespace CaplugaAPI
                 new ObjectParameter("ScheduleID", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAppointment", appointmentIDParameter, userIDParameter, addressIDParameter, nameParameter, descriptionParameter, scheduleIDParameter);
+        }
+    
+        public virtual int UpdateScheduleAppointment(Nullable<long> scheduleID, string dName, Nullable<System.DateTime> dateandTime)
+        {
+            var scheduleIDParameter = scheduleID.HasValue ?
+                new ObjectParameter("ScheduleID", scheduleID) :
+                new ObjectParameter("ScheduleID", typeof(long));
+    
+            var dNameParameter = dName != null ?
+                new ObjectParameter("DName", dName) :
+                new ObjectParameter("DName", typeof(string));
+    
+            var dateandTimeParameter = dateandTime.HasValue ?
+                new ObjectParameter("DateandTime", dateandTime) :
+                new ObjectParameter("DateandTime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateScheduleAppointment", scheduleIDParameter, dNameParameter, dateandTimeParameter);
         }
     }
 }
