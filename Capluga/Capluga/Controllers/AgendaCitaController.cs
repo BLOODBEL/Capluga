@@ -1,4 +1,4 @@
-﻿using Capluga.Entities;
+using Capluga.Entities;
 using Capluga.Models;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
@@ -19,7 +19,6 @@ namespace Capluga.Controllers
         [HttpGet]
         public ActionResult RegistrarCita()
         {
-            
             ViewBag.Horarios = claseHorario.verHorarios();
             return View(new AgendaEnt());
         }
@@ -57,7 +56,6 @@ namespace Capluga.Controllers
                 return RedirectToAction("RegistrarCita"); 
             }
         }
-
 
         [HttpGet]
         public ActionResult ConsultaCitas()

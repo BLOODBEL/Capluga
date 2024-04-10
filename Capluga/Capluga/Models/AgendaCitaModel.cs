@@ -1,4 +1,4 @@
-﻿using Capluga.Entities;
+using Capluga.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,7 +14,7 @@ namespace Capluga.Models
     public class AgendaCitaModel
     {
         public string rutaServidor = ConfigurationManager.AppSettings["RutaApi"];
-
+      
         public async Task<string> RegistrarCita(AgendaEnt entidad)
         {
             using (var client = new HttpClient())
@@ -29,7 +29,6 @@ namespace Capluga.Models
                 }
                 else
                 {
-                    // Manejo adecuado de errores HTTP
                     return $"Error: {res.StatusCode}";
                 }
             }

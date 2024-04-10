@@ -10,7 +10,6 @@ namespace CaplugaAPI.Controllers
 {
     public class AgendaCitaController : ApiController
     {
-
         [HttpPost]
         [Route("RegistrarCita")]
         public string RegistrarCita(AppointmentScheduling appointmentScheduling)

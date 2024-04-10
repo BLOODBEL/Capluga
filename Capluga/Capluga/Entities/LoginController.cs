@@ -9,7 +9,7 @@ namespace Capluga.Controllers
     {
 
         UsuarioModel usuarioModel = new UsuarioModel();
-        RolesModel rolesModel = new RolesModel();
+        RolesModel relesModel = new RolesModel();
 
         [HttpGet]
         public ActionResult Index()
@@ -21,7 +21,7 @@ namespace Capluga.Controllers
         public ActionResult CerrarSesion()
         {
             Session.Clear();
-            return RedirectToAction("IniciarSesion", "Login");
+            return RedirectToAction("Index", "Login");
         }
 
 
@@ -34,12 +34,13 @@ namespace Capluga.Controllers
         [HttpGet]
         public ActionResult RegistrarCuenta()
         {
+            //ViewBag.ListaRoles = usuarioModel.ListaRoles();
             return View();
         }
 
         [HttpPost]
         public ActionResult RegistrarCuenta(UsuarioEnt entidad)
-        {
+        {            
             string respuesta = usuarioModel.RegistrarCuenta(entidad);
 
             if (respuesta == "OK")
@@ -60,11 +61,10 @@ namespace Capluga.Controllers
 
             if (respuesta != null)
             {
-                Session["UserID"] = respuesta.UserID;
-                Session["Nombre"] = respuesta.UserName;
-                Session["Rol"] = respuesta.RoleID;
-                Session["AddressID"] = respuesta.AddressID;
-                return RedirectToAction("Productos", "Home");
+                Session["Nombre"] = respuesta.Name;
+                Session["Rol"] = respuesta.RoleID.RolName;
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -74,15 +74,15 @@ namespace Capluga.Controllers
         }
 
         [HttpGet]
-        public ActionResult RecuperarCuenta()
+        public ActionResult RecuperarContrasenna()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult RecuperarCuenta(UsuarioEnt entidad)
+        public ActionResult RecuperarContrasenna(UsuarioEnt entidad)
         {
-            string respuesta = usuarioModel.RecuperarCuenta(entidad);
+            string respuesta = usuarioModel.RecuperarContrasenna(entidad);
 
             if (respuesta == "OK")
             {

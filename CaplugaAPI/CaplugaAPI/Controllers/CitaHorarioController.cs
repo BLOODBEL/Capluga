@@ -103,13 +103,11 @@ namespace CaplugaAPI.Controllers
                     List<System.Web.Mvc.SelectListItem> horarios = new List<System.Web.Mvc.SelectListItem>();
                     foreach (var item in datos)
                     {
-                        string displayText = $"{item.Dname} - {item.DateandTime.ToString("dd/MM/yyyy HH:mm")}";
-
+                        string displayText = $"{item.Dname} - {item.DateandTime.ToString("dd/MM/yyyy HH:mm")}"; 
                         horarios.Add(new System.Web.Mvc.SelectListItem
                         {
                             Value = item.ScheduleID.ToString(),
                             Text = displayText
-
                         });
                     }
 
@@ -123,4 +121,3 @@ namespace CaplugaAPI.Controllers
         }
     }
 }
-

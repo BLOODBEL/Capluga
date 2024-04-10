@@ -142,15 +142,12 @@ namespace CaplugaAPI.Controllers
 
                         string rutaArchivo = AppDomain.CurrentDomain.BaseDirectory + "Templates\\Contrasenna.html";
                         string html = File.ReadAllText(rutaArchivo);
-
                         html = html.Replace("@@Nombre", usuario.UserName);
                         html = html.Replace("@@Usuario", usuario.Email);
                         html = html.Replace("@@Contrasenna", usuario.Password);
 
                         util.EnviarCorreo(email, "Contraseña de Acceso", html);
-
                         context.SaveChanges();
-
                         return "OK";
                     }
                     else { return string.Empty; }
