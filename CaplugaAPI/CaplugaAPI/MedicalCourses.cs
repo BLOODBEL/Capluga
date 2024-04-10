@@ -14,14 +14,21 @@ namespace CaplugaAPI
     
     public partial class MedicalCourses
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MedicalCourses()
+        {
+            this.Registeredcourses = new HashSet<Registeredcourses>();
+        }
+    
         public long MedicalCourseID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; }
+        public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public string State { get; set; }
-        public long CreatedByUserID { get; set; }
+        public string Image { get; set; }
+        public bool State { get; set; }
     
-        public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Registeredcourses> Registeredcourses { get; set; }
     }
 }

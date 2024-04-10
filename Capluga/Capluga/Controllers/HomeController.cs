@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capluga.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,46 +10,29 @@ namespace Capluga.Controllers
     public class HomeController : Controller
     {
 
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        ProductoModel modelProducto = new ProductoModel();
 
         [HttpGet]
         public ActionResult About()
         {
-          
-
             return View();
         }
-
-
-        [HttpGet]
-        public ActionResult Contact()
-        {
-           
-
-            return View();
-        }
-
 
         [HttpGet]
         public ActionResult Productos()
         {
-
-
-            return View();
+            var datos = modelProducto.Productos();
+            return View(datos);
         }
 
-
         [HttpGet]
-        public ActionResult services()
+        public ActionResult Error()
         {
-
-
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Admin()
+        {
             return View();
         }
     }

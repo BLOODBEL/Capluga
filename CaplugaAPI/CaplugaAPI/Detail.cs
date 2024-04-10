@@ -20,6 +20,7 @@ namespace CaplugaAPI
         public int PaidQuantity { get; set; }
         public decimal Tax { get; set; }
         public long MasterPurchaseID { get; set; }
+        public string PaymentStatus { get; set; }
     
         public virtual MasterPurchase MasterPurchase { get; set; }
         public virtual MedicalImplements MedicalImplements { get; set; }

@@ -2,14 +2,15 @@
 
 @{
     ViewBag.Title = "Registrar Nuevo Horario";
-    Layout = "~/Views/Shared/_LayoutAdm.cshtml"; // Asume que tienes un layout definido
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <main>
-
-
-
-    @using (Html.BeginForm("RegistrarHorarios", "CitaHorario", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+                <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                    @using (Html.BeginForm("RegistrarHorarios", "CitaHorario", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -28,6 +29,7 @@
             </label>
             @Html.EditorFor(model => model.DateandTime, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
             @Html.ValidationMessageFor(model => model.DateandTime, "", new { @class = "text-danger" })
+
         </div>
 
 
@@ -38,8 +40,10 @@
                 </button>
             </div>
         </div>
-
-
     }
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 

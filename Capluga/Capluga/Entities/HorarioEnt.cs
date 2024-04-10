@@ -9,9 +9,8 @@ namespace Capluga.Entities
     {
 
         public long ScheduleID { get; set; }
-
         public string Dname { get; set; }
-
         public DateTime DateandTime { get; set; }
+
     }
 }
