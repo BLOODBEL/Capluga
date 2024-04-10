@@ -1,8 +1,10 @@
-﻿using Capluga.Entities;
+using Capluga.Entities;
 using Capluga.Models;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,24 +19,41 @@ namespace Capluga.Controllers
         [HttpGet]
         public ActionResult RegistrarCita()
         {
-            ViewBag.horarios = claseHorario.verHorarios();
-            return View();
+            ViewBag.Horarios = claseHorario.verHorarios();
+            return View(new AgendaEnt());
         }
 
         [HttpPost]
-        public ActionResult RegistrarCita(AgendaEnt entidad)
+        public async Task<ActionResult> RegistrarCita(AgendaEnt entidad)
         {
-            string respuesta = modelAgenda.RegistrarCita(entidad);
-
-            if (respuesta == "OK")
+           
+            if (Session["UserID"] == null || Session["AddressID"] == null)
             {
-                return RedirectToAction("Index", "Home");
+                TempData["ErrorMessage"] = "No se ha iniciado sesión o la sesión ha caducado.";
+                return RedirectToAction("RegistrarCita"); 
+            }
+
+            if (!long.TryParse(Session["UserID"].ToString(), out long userID) ||
+                !long.TryParse(Session["AddressID"].ToString(), out long addressID))
+            {
+                TempData["ErrorMessage"] = "Error al obtener información de la sesión.";
+                return RedirectToAction("RegistrarCita");
+            }
+
+            entidad.UserID = userID;
+            entidad.AddressID = addressID;
+
+            var respuesta = await modelAgenda.RegistrarCita(entidad);
+
+            if (respuesta.Equals("OK", StringComparison.OrdinalIgnoreCase))
+            {
+                TempData["SuccessMessage"] = "La cita ha sido registrada con éxito.";
+                return RedirectToAction("RegistrarCita");
             }
             else
             {
-                ViewBag.MensajeUsuario = "No se ha podido registrar su información";
-                ViewBag.horarios = claseHorario.verHorarios();
-                return View();
+                TempData["ErrorMessage"] = "Error al registrar la cita: " + respuesta;
+                return RedirectToAction("RegistrarCita"); 
             }
         }
 

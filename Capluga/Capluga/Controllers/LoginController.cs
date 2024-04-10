@@ -9,7 +9,7 @@ namespace Capluga.Controllers
     {
 
         UsuarioModel usuarioModel = new UsuarioModel();
-        RolesModel relesModel = new RolesModel();
+        RolesModel rolesModel = new RolesModel();
 
         [HttpGet]
         public ActionResult Index()
@@ -21,7 +21,7 @@ namespace Capluga.Controllers
         public ActionResult CerrarSesion()
         {
             Session.Clear();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("IniciarSesion", "Login");
         }
 
 
@@ -34,13 +34,12 @@ namespace Capluga.Controllers
         [HttpGet]
         public ActionResult RegistrarCuenta()
         {
-            //ViewBag.ListaRoles = usuarioModel.ListaRoles();
             return View();
         }
 
         [HttpPost]
         public ActionResult RegistrarCuenta(UsuarioEnt entidad)
-        {            
+        {
             string respuesta = usuarioModel.RegistrarCuenta(entidad);
 
             if (respuesta == "OK")
@@ -61,10 +60,11 @@ namespace Capluga.Controllers
 
             if (respuesta != null)
             {
-                Session["Nombre"] = respuesta.Name;
-                Session["Rol"] = respuesta.RoleID.RolName;
-
-                return RedirectToAction("Index", "Home");
+                Session["UserID"] = respuesta.UserID;
+                Session["Nombre"] = respuesta.UserName;
+                Session["Rol"] = respuesta.RoleID;
+                Session["AddressID"] = respuesta.AddressID;
+                return RedirectToAction("Productos", "Home");
             }
             else
             {
@@ -74,7 +74,7 @@ namespace Capluga.Controllers
         }
 
         [HttpGet]
-        public ActionResult RecuperarContrasenna()
+        public ActionResult RecuperarCuenta()
         {
             return View();
         }
